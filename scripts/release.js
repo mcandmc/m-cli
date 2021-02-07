@@ -5,7 +5,7 @@ const inquirer = require('inquirer');
 const currentVersion = require('../package.json').version;
 
 const release = async () => {
-  console.log(`Current easy cli version is ${currentVersion}`);
+  console.log(`Current @m-cli version is ${currentVersion}`);
   const releaseActions = ['patch', 'minor', 'major'];
   const versions = {};
   // 生成预发布版本标示

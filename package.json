@@ -1,6 +1,6 @@
 {
-  "name": "easy-tool-cli",
-  "version": "1.0.33",
+  "name": "@mcandmc/m-cli",
+  "version": "1.0.1",
   "description": "a simple CLI for scaffolding of FE",
   "main": "index.js",
   "scripts": {
@@ -9,7 +9,7 @@
     "test": "jest --color"
   },
   "bin": {
-    "easy": "bin/easy.js"
+    "m-cli": "bin/index.js"
   },
   "publishConfig": {
     "access": "public"
@@ -19,7 +19,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/NuoHui/easy-cli.git"
+    "url": "https://github.com/mcandmc/m-cli.git"
   },
   "keywords": [
     "cli",
@@ -38,7 +38,7 @@
       "git add"
     ]
   },
-  "author": "xyz <xyz1657413883@gmail.com>",
+  "author": "mcandmc <739095978@qq.com>",
   "license": "MIT",
   "devDependencies": {
     "@commitlint/cli": "^7.6.1",

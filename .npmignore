@@ -16,3 +16,4 @@ coverage.lcov
 .github
 CHANGELOG.md
 *.lock
+package-lock.json
