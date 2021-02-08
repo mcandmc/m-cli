@@ -36,7 +36,7 @@ program
   .usage('<command> [options]'); // 使用信息
 
 program.command('upgrade').action(() => {
-  const { clearConsole } = require('./util/clearConsole');
+  const { clearConsole } = require('../lib/util/clearConsole');
   clearConsole(true);
 });
 
@@ -75,6 +75,14 @@ program
   .action((templateName, cmd) => {
     validateArgsLen(process.argv.length, 4);
     require('../lib/delete-template')(templateName);
+  });
+
+// 重置项目模板
+program
+  .command('reset')
+  .description('重置项目模板')
+  .action(() => {
+    require('../lib/reset-template')();
   });
 
 // 处理非法命令

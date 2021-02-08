@@ -1,6 +1,6 @@
 {
   "name": "@mcandmc/m-cli",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "a simple CLI for scaffolding of FE",
   "main": "index.js",
   "scripts": {
