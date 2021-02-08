@@ -34,8 +34,7 @@
   "lint-staged": {
     "**/*.js": [
       "eslint --fix",
-      "prettier --write",
-      "git add"
+      "prettier --write"
     ]
   },
   "author": "mcandmc <739095978@qq.com>",
