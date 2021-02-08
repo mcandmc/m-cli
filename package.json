@@ -41,24 +41,24 @@
   "author": "mcandmc <739095978@qq.com>",
   "license": "MIT",
   "devDependencies": {
-    "@commitlint/cli": "^7.6.1",
-    "@commitlint/config-conventional": "^7.6.0",
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
     "babel-eslint": "^10.0.1",
-    "cross-env": "^5.2.0",
-    "eslint": "^5.16.0",
-    "eslint-config-prettier": "^4.3.0",
+    "cross-env": "^7.0.2",
+    "eslint": "^7.17.0",
+    "eslint-config-prettier": "^7.2.0",
     "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-import": "^2.17.2",
     "eslint-plugin-node": "^9.0.1",
-    "eslint-plugin-prettier": "^3.1.0",
     "eslint-plugin-promise": "^4.1.1",
     "eslint-plugin-standard": "^4.0.0",
     "husky": "^2.3.0",
     "jest": "^24.8.0",
-    "lint-staged": "^8.1.7",
+    "lint-staged": "^10.5.4",
     "nodemon": "^1.19.0",
-    "prettier": "^1.17.1",
-    "standard-version": "^8.0.1"
+    "prettier": "^2.2.1",
+    "standard-version": "^9.1.0"
   },
   "engines": {
     "node": ">=8.0.0"

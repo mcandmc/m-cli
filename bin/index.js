@@ -20,8 +20,8 @@ function checkNodeVersion(wanted, cliName) {
           cliName +
           ' requires Node ' +
           wanted +
-          '.\nPlease upgrade your Node version.'
-      )
+          '.\nPlease upgrade your Node version.',
+      ),
     );
     // 退出进程
     process.exit(1);
@@ -29,26 +29,31 @@ function checkNodeVersion(wanted, cliName) {
 }
 
 // 检测node版本
-checkNodeVersion(requiredNodeVersion, '@easy/cli');
+checkNodeVersion(requiredNodeVersion, '@mcandmc/m-cli');
 
 program
   .version(require('../package').version, '-v, --version') // 版本
   .usage('<command> [options]'); // 使用信息
 
+program.command('upgrade').action(() => {
+  const { clearConsole } = require('./util/clearConsole');
+  clearConsole(true);
+});
+
 // 初始化项目模板
 program
   .command('create <template-name> <project-name>')
-  .description('create a new project from a template')
+  .description('从模板创建一个新的项目')
   .action((templateName, projectName, cmd) => {
     // 输入参数校验
     validateArgsLen(process.argv.length, 5);
-    require('../lib/easy-create')(lowercase(templateName), projectName);
+    require('../lib/create')(lowercase(templateName), projectName);
   });
 
 // 添加一个项目模板
 program
   .command('add <template-name> <git-repo-address>')
-  .description('add a project template')
+  .description('新增一个项目模板')
   .action((templateName, gitRepoAddress, cmd) => {
     validateArgsLen(process.argv.length, 5);
     require('../lib/add-template')(lowercase(templateName), gitRepoAddress);
@@ -57,8 +62,8 @@ program
 // 列出支持的项目模板
 program
   .command('list')
-  .description('list all available project template')
-  .action(cmd => {
+  .description('列出所有可用的项目模板')
+  .action((cmd) => {
     validateArgsLen(process.argv.length, 3);
     require('../lib/list-template')();
   });
@@ -66,14 +71,14 @@ program
 // 删除一个项目模板
 program
   .command('delete <template-name>')
-  .description('delete a project template')
+  .description('删除一个项目模板')
   .action((templateName, cmd) => {
     validateArgsLen(process.argv.length, 4);
     require('../lib/delete-template')(templateName);
   });
 
 // 处理非法命令
-program.arguments('<command>').action(cmd => {
+program.arguments('<command>').action((cmd) => {
   // 不退出输出帮助信息
   program.outputHelp();
   console.log(`  ` + chalk.red(`Unknown command ${chalk.yellow(cmd)}.`));
@@ -82,7 +87,7 @@ program.arguments('<command>').action(cmd => {
 });
 
 // 重写commander某些事件
-enhanceErrorMessages('missingArgument', argsName => {
+enhanceErrorMessages('missingArgument', (argsName) => {
   return `Missing required argument ${chalk.yellow(`<${argsName}>`)}`;
 });
 
@@ -95,11 +100,11 @@ if (!process.argv.slice(2).length) {
 
 // easy支持的命令
 function suggestCommands(cmd) {
-  const avaliableCommands = program.commands.map(cmd => {
+  const availableCommands = program.commands.map((cmd) => {
     return cmd._name;
   });
   // 简易智能匹配用户命令
-  const suggestion = didYouMean(cmd, avaliableCommands);
+  const suggestion = didYouMean(cmd, availableCommands);
   if (suggestion) {
     console.log(`  ` + chalk.red(`Did you mean ${chalk.yellow(suggestion)}?`));
   }
@@ -111,10 +116,6 @@ function lowercase(str) {
 
 function validateArgsLen(argvLen, maxArgvLens) {
   if (argvLen > maxArgvLens) {
-    console.log(
-      chalk.yellow(
-        '\n Info: You provided more than argument. the rest are ignored.'
-      )
-    );
+    console.log(chalk.yellow('\n Info: You provided more than argument. the rest are ignored.'));
   }
 }

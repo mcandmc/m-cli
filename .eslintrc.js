@@ -5,10 +5,11 @@ module.exports = {
     es6: true
   },
   extends: ['standard', 'plugin:prettier/recommended'],
-  globals: {},
+  ignorePatterns: ['.eslintrc.js', '.prettierrc.js'],
   parserOptions: {
     ecmaVersion: 2018
   },
+  globals: {},
   plugins: ['prettier'],
   rules: {
     'no-useless-return': 0

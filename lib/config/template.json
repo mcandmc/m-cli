@@ -1,10 +1,14 @@
 {
   "lib": {
-    "github": "https://github.com/mcandmc/tool-template.git",
+    "address": "https://github.com/mcandmc/tool-template.git",
     "download": "github:mcandmc/tool-template"
   },
   "teaching": {
-    "gitlab": "https://gitlab.xinghuolive.com/teaching-fe/teaching-template.git",
+    "address": "https://gitlab.xinghuolive.com/teaching-fe/teaching-template.git",
     "download": "gitlab:gitlab.xinghuolive.com:teaching-fe/teaching-template"
+  },
+  "github": {
+    "address": "https://github.com/NuoHui/node_code_constructor.git",
+    "download": "github:NuoHui/node_code_constructor"
   }
 }
