@@ -9,10 +9,10 @@ const release = async () => {
   const releaseActions = ['patch', 'minor', 'major'];
   const versions = {};
   // 生成预发布版本标示
-  releaseActions.map(r => (versions[r] = semver.inc(currentVersion, r)));
-  const releaseChoices = releaseActions.map(r => ({
+  releaseActions.map((r) => (versions[r] = semver.inc(currentVersion, r)));
+  const releaseChoices = releaseActions.map((r) => ({
     name: `${r} (${versions[r]})`,
-    value: r
+    value: r,
   }));
   // 选择发布方式
   const { release } = await inquirer.prompt([
@@ -20,8 +20,8 @@ const release = async () => {
       name: 'release',
       message: 'Select a release type',
       type: 'list',
-      choices: [...releaseChoices]
-    }
+      choices: [...releaseChoices],
+    },
   ]);
   // 优先自定义版本
   const version = versions[release];
@@ -30,17 +30,17 @@ const release = async () => {
     {
       name: 'yes',
       message: `Confirm releasing ${version}`,
-      type: 'confirm'
-    }
+      type: 'confirm',
+    },
   ]);
   if (yes) {
     execSync(`standard-version -r ${release}`, {
-      stdio: 'inherit'
+      stdio: 'inherit',
     });
   }
 };
 
-release().catch(err => {
+release().catch((err) => {
   console.error(err);
   process.exit(1);
 });
