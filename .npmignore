@@ -17,3 +17,4 @@ coverage.lcov
 CHANGELOG.md
 *.lock
 package-lock.json
+template.json
