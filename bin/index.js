@@ -5,7 +5,8 @@ const chalk = require('chalk'); // 命令行输出美化
 const didYouMean = require('didyoumean'); // 简易的智能匹配引擎
 const semver = require('semver'); // npm的语义版本包
 const enhanceErrorMessages = require('../lib/util/enhanceErrorMessages.js');
-const requiredNodeVersion = require('../package.json').engines.node;
+const packageJson = require('../package.json');
+const requiredNodeVersion = packageJson.engines.node;
 
 didYouMean.threshold = 0.6;
 
@@ -29,10 +30,10 @@ function checkNodeVersion(wanted, cliName) {
 }
 
 // 检测node版本
-checkNodeVersion(requiredNodeVersion, '@mcandmc/m-cli');
+checkNodeVersion(requiredNodeVersion, packageJson.name);
 
 program
-  .version(require('../package').version, '-v, --version') // 版本
+  .version(packageJson.version, '-v, --version') // 版本
   .usage('<command> [options]'); // 使用信息
 
 program.command('upgrade').action(() => {
@@ -47,7 +48,7 @@ program
   .action((templateName, projectName, cmd) => {
     // 输入参数校验
     validateArgsLen(process.argv.length, 5);
-    require('../lib/create')(lowercase(templateName), projectName);
+    require('../lib/create.js')(lowercase(templateName), projectName);
   });
 
 // 添加一个项目模板
@@ -56,7 +57,7 @@ program
   .description('新增一个项目模板')
   .action((templateName, gitRepoAddress, cmd) => {
     validateArgsLen(process.argv.length, 5);
-    require('../lib/add-template')(lowercase(templateName), gitRepoAddress);
+    require('../lib/add.js')(lowercase(templateName), gitRepoAddress);
   });
 
 // 列出支持的项目模板
@@ -65,7 +66,7 @@ program
   .description('列出所有可用的项目模板')
   .action((cmd) => {
     validateArgsLen(process.argv.length, 3);
-    require('../lib/list-template')();
+    require('../lib/list.js')();
   });
 
 // 删除一个项目模板
@@ -74,7 +75,7 @@ program
   .description('删除一个项目模板')
   .action((templateName, cmd) => {
     validateArgsLen(process.argv.length, 4);
-    require('../lib/delete-template')(templateName);
+    require('../lib/delete.js')(templateName);
   });
 
 // 重置项目模板
@@ -82,7 +83,7 @@ program
   .command('reset')
   .description('重置项目模板')
   .action(() => {
-    require('../lib/reset-template')();
+    require('../lib/reset.js')();
   });
 
 // 处理非法命令
@@ -96,17 +97,17 @@ program.arguments('<command>').action((cmd) => {
 
 // 重写commander某些事件
 enhanceErrorMessages('missingArgument', (argsName) => {
-  return `Missing required argument ${chalk.yellow(`<${argsName}>`)}`;
+  return `缺少必要参数 ${chalk.yellow(`<${argsName}>`)}`;
 });
 
 program.parse(process.argv); // 把命令行参数传给commander解析
 
-// 输入easy显示帮助信息
+// 输入m-cli显示帮助信息
 if (!process.argv.slice(2).length) {
   program.outputHelp();
 }
 
-// easy支持的命令
+// 支持的命令
 function suggestCommands(cmd) {
   const availableCommands = program.commands.map((cmd) => {
     return cmd._name;
